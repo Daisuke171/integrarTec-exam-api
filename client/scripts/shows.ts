@@ -1,18 +1,24 @@
+import * as dotEnv from 'dotenv'
+dotEnv.config()
+
 let currentPage = 0;
 const itemsPerPage = 9;
 let allShows: any[] = [];
 let allArtists: any[] = [];
+const apiUrlArt: string = process.env.API_FETCH_ARTISTS ?? '';
+const apiUrlShow: string = process.env.API_FETCH_SHOWS ?? '';
+
 
 async function fetchShows() {
-  const response = await fetch("http://localhost:3000/shows");
+  const response = await fetch(apiUrlShow);
   allShows = await response.json();
   await fetchArtists2();
   renderShows(currentPage);
 }
 
 async function fetchArtists2() {
-  const response = await fetch("http://localhost:3000/artists");
-  allArtists = await response.json(); // <-- use allArtists
+  const response = await fetch(apiUrlArt);
+  allArtists = await response.json();
 }
 
 function renderShows(page: number) {
