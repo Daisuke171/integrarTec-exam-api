@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shows List</title>
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <ul class="navbar__list">
+        <li class="navbar__list--links"><a href="index.html">Home</a></li>
+        <li class="navbar__list--links"><a href="artists.html">Artists</a></li>
+        <li class="navbar__list--links"><a href="shows.html">Shows</a></li>
+      </ul>
+    </nav>
+    <header>
+      <h1 class="header__title">Shows Catalogue</h1>
+    </header>
+
+    <main>
+      <section class="main__shows-section" id="shows"></section>
+      <div id="pagination">
+        <button id="prevBtn">Anterior</button>
+        <span id="pageIndicator"></span>
+        <button id="nextBtn">Siguiente</button>
+      </div>
+    </main>
+    <footer class="footer">
+      <p>&copy; 2025 JMusic API. All rights reserved.</p>
+    </footer>
+    <script src="scripts/shows.ts" type="module"></script>
+  </body>
+</html>

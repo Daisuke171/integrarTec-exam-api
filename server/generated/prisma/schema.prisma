@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Artist {
+  id        String       @id @default(uuid()) @db.Uuid
+  name      String
+  members   String
+  origin    String
+  genres    String
+  image     String
+  status    Boolean
+  createdAt DateTime     @default(now()) @map("created_at")
+  updatedAt DateTime     @updatedAt @map("updated_at")
+  shows     ShowArtist[] // <-- updated
+
+  @@map("artists")
+}
+
+model Show {
+  id        String       @id @default(uuid()) @db.Uuid
+  name      String
+  location  String
+  date      DateTime
+  createdAt DateTime     @default(now()) @map("created_at")
+  updatedAt DateTime     @updatedAt @map("updated_at")
+  artists   ShowArtist[] // <-- updated
+
+  @@map("shows")
+}
+
+model ShowArtist {
+  show     Show   @relation(fields: [showId], references: [id])
+  showId   String @db.Uuid
+  artist   Artist @relation(fields: [artistId], references: [id])
+  artistId String @db.Uuid
+
+  @@id([showId, artistId])
+  @@map("show_artists")
+}
