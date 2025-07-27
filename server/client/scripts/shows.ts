@@ -1,12 +1,9 @@
-import * as dotEnv from 'dotenv'
-dotEnv.config()
-
 let currentPage = 0;
 const itemsPerPage = 9;
 let allShows: any[] = [];
 let allArtists: any[] = [];
-const apiUrlArt: string = process.env.API_FETCH_ARTISTS ?? '';
-const apiUrlShow: string = process.env.API_FETCH_SHOWS ?? '';
+const apiUrlArt2: string = "https://integrartec-exam-api.onrender.com/artists"
+const apiUrlShow: string = "https://integrartec-exam-api.onrender.com/shows"
 
 
 async function fetchShows() {
@@ -17,7 +14,7 @@ async function fetchShows() {
 }
 
 async function fetchArtists2() {
-  const response = await fetch(apiUrlArt);
+  const response = await fetch(apiUrlArt2);
   allArtists = await response.json();
 }
 

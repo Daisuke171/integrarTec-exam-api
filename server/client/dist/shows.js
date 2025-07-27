@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,15 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var _a, _b;
-import * as dotEnv from 'dotenv';
-dotEnv.config();
 let currentPage = 0;
 const itemsPerPage = 9;
 let allShows = [];
 let allArtists = [];
-const apiUrlArt = (_a = process.env.API_FETCH_ARTISTS) !== null && _a !== void 0 ? _a : '';
-const apiUrlShow = (_b = process.env.API_FETCH_SHOWS) !== null && _b !== void 0 ? _b : '';
+const apiUrlArt2 = "https://integrartec-exam-api.onrender.com/artists";
+const apiUrlShow = "https://integrartec-exam-api.onrender.com/shows";
 function fetchShows() {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch(apiUrlShow);
@@ -26,7 +24,7 @@ function fetchShows() {
 }
 function fetchArtists2() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch(apiUrlArt);
+        const response = yield fetch(apiUrlArt2);
         allArtists = yield response.json();
     });
 }
