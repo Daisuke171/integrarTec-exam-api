@@ -5,6 +5,7 @@ let currentPageArt = 0;
 const itemsPerPageArt = 9;
 let allArtists1: any[] = [];
 const apiUrlArt: string = process.env.API_FETCH_ARTISTS ?? "";
+console.log(apiUrlArt);
 
 async function fetchArtists() {
   const response = await fetch(apiUrlArt);
