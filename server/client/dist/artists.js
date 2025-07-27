@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,14 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var _a;
-import * as dotEnv from "dotenv";
-dotEnv.config();
 let currentPageArt = 0;
 const itemsPerPageArt = 9;
 let allArtists1 = [];
-const apiUrlArt = (_a = process.env.API_FETCH_ARTISTS) !== null && _a !== void 0 ? _a : "";
-console.log(apiUrlArt);
+const apiUrlArt = "https://integrartec-exam-api.onrender.com/artists";
 function fetchArtists() {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch(apiUrlArt);
