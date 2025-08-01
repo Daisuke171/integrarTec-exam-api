@@ -6,9 +6,11 @@ import {
   Body,
   Put,
   Delete,
+  ParseIntPipe,
+  HttpStatus,
 } from '@nestjs/common';
 import { ArtistsService } from '../use-cases/artists.service';
-import { Artist } from '../domain/entities/artists.entity';
+import { CreateArtistsDto } from '../domain/dto/create-user.dto';
 
 @Controller('artists')
 export class ArtistsController {
@@ -20,22 +22,35 @@ export class ArtistsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: string,
+  ) {
     return this.artistsService.findOne(id);
   }
 
   @Post()
-  create(@Body() data: Omit<Artist, 'id'>) {
+  create(@Body() data: CreateArtistsDto) {
     return this.artistsService.create(data);
   }
 
   @Post('bulk')
-  createMany(@Body() artists: Omit<Artist, 'id'>[]) {
+  createMany(@Body() artists: CreateArtistsDto[]) {
     return this.artistsService.createMany(artists);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() data: Partial<Artist>) {
+  update(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: string,
+    @Body() data: Partial<CreateArtistsDto>,
+  ) {
     return this.artistsService.update(id, data);
   }
 

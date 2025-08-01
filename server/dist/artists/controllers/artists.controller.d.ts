@@ -1,12 +1,12 @@
 import { ArtistsService } from '../use-cases/artists.service';
-import { Artist } from '../domain/entities/artists.entity';
+import { CreateArtistsDto } from '../domain/dto/create-user.dto';
 export declare class ArtistsController {
     private readonly artistsService;
     constructor(artistsService: ArtistsService);
-    findAll(): Promise<Artist[]>;
-    findOne(id: string): Promise<Artist | null>;
-    create(data: Omit<Artist, 'id'>): Promise<Artist>;
-    createMany(artists: Omit<Artist, 'id'>[]): Promise<Artist[]>;
-    update(id: string, data: Partial<Artist>): Promise<Artist | null>;
+    findAll(): Promise<import("../domain/entities/artists.entity").Artist[]>;
+    findOne(id: string): Promise<import("../domain/entities/artists.entity").Artist | null>;
+    create(data: CreateArtistsDto): Promise<import("../domain/entities/artists.entity").Artist>;
+    createMany(artists: CreateArtistsDto[]): Promise<import("../domain/entities/artists.entity").Artist[]>;
+    update(id: string, data: Partial<CreateArtistsDto>): Promise<import("../domain/entities/artists.entity").Artist | null>;
     delete(id: string): Promise<boolean>;
 }

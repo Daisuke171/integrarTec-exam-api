@@ -2,12 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { Artist } from 'src/artists/domain/entities/artists.entity';
 import { PrismaClient } from 'generated/prisma';
 import { ArtistRepository } from 'src/artists/domain/repository/artists.repository';
+import { CreateArtistsDto } from 'src/artists/domain/dto/create-user.dto';
 
 @Injectable()
 export class ArtistPrismaRepository implements ArtistRepository {
   private prisma = new PrismaClient();
 
-  async findAll(): Promise<Artist[]> {
+  async findAll(): Promise<CreateArtistsDto[]> {
     const artists = await this.prisma.artist.findMany();
     return artists.map(
       (a) =>
@@ -18,7 +19,7 @@ export class ArtistPrismaRepository implements ArtistRepository {
     );
   }
 
-  async findOne(id: string): Promise<Artist | null> {
+  async findOne(id: string): Promise<CreateArtistsDto | null> {
     const a = await this.prisma.artist.findUnique({ where: { id } });
     if (!a) return null;
     return new Artist({
@@ -27,7 +28,7 @@ export class ArtistPrismaRepository implements ArtistRepository {
     });
   }
 
-  async create(artist: Artist): Promise<Artist> {
+  async create(artist: CreateArtistsDto): Promise<CreateArtistsDto> {
     const created = await this.prisma.artist.create({
       data: {
         ...artist,
@@ -40,8 +41,8 @@ export class ArtistPrismaRepository implements ArtistRepository {
     });
   }
 
-  async createMany(artists: Artist[]): Promise<Artist[]> {
-    const createdArtists: Artist[] = [];
+  async createMany(artists: CreateArtistsDto[]): Promise<CreateArtistsDto[]> {
+    const createdArtists: CreateArtistsDto[] = [];
 
     for (const artist of artists) {
       const created = await this.prisma.artist.create({
@@ -62,7 +63,10 @@ export class ArtistPrismaRepository implements ArtistRepository {
     return createdArtists;
   }
 
-  async update(id: string, data: Partial<Artist>): Promise<Artist | null> {
+  async update(
+    id: string,
+    data: Partial<CreateArtistsDto>,
+  ): Promise<CreateArtistsDto | null> {
     const updated = await this.prisma.artist.update({
       where: { id },
       data: {

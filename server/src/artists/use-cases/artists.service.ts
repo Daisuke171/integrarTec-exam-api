@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ArtistRepository } from '../domain/repository/artists.repository';
 import { Artist } from '../domain/entities/artists.entity';
+import { CreateArtistsDto } from '../domain/dto/create-user.dto';
 
 @Injectable()
 export class ArtistsService {
@@ -14,7 +15,7 @@ export class ArtistsService {
     return this.artitsRepository.findOne(id);
   }
 
-  create(data: Omit<Artist, 'id'>) {
+  create(data: Omit<CreateArtistsDto, 'id' | 'createdAt' | 'updatedAt'>) {
     return this.artitsRepository.create(
       new Artist({
         name: data.name,
@@ -27,7 +28,9 @@ export class ArtistsService {
     );
   }
 
-  createMany(data: Omit<Artist, 'id'>[]): Promise<Artist[]> {
+  createMany(
+    data: Omit<CreateArtistsDto, 'id' | 'createdAt' | 'updatedAt'>[],
+  ): Promise<Artist[]> {
     return Promise.all(
       data.map((artistData) =>
         this.artitsRepository.create(
@@ -44,7 +47,7 @@ export class ArtistsService {
     );
   }
 
-  update(id: string, data: Partial<Artist>) {
+  update(id: string, data: Partial<CreateArtistsDto>) {
     return this.artitsRepository.update(id, data);
   }
 

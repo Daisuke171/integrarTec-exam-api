@@ -33,7 +33,7 @@ function renderArtists(page: number) {
     div.style.minWidth = "220px";
     div.style.textAlign = "center";
     container.style.display = "grid";
-    container.style.gridTemplateColumns = "repeat(3, 1fr)";
+    container.style.gridTemplateColumns = "repeat(auto-fill, minmax(300px, 1fr))";
     container.style.gap = "2.5rem";
     container.style.justifyItems = "center";
     container.style.alignItems = "stretch";

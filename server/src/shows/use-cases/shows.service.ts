@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ShowRepository } from '../domain/repositories/shows.repository';
 import { Show } from '../domain/entities/shows.entity';
+import { CreateShowsDto } from '../domain/dto/create-shows.dto';
 
 @Injectable()
 export class ShowService {
@@ -14,7 +15,7 @@ export class ShowService {
     return this.showRepository.findOne(id);
   }
 
-  create(data: Omit<Show, 'id'>) {
+  create(data: CreateShowsDto) {
     return this.showRepository.create(
       new Show({
         name: data.name,
@@ -25,7 +26,7 @@ export class ShowService {
     );
   }
 
-  createMany(shows: Omit<Show, 'id'>[]): Promise<Show[]> {
+  createMany(shows: CreateShowsDto[]): Promise<CreateShowsDto[]> {
     return Promise.all(
       shows.map((showData) =>
         this.showRepository.create(
@@ -40,7 +41,7 @@ export class ShowService {
     );
   }
 
-  update(id: string, data: Partial<Show>) {
+  update(id: string, data: Partial<CreateShowsDto>) {
     return this.showRepository.update(id, data);
   }
 

@@ -2,12 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { Show } from 'src/shows/domain/entities/shows.entity';
 import { PrismaClient } from 'generated/prisma';
 import { ShowRepository } from 'src/shows/domain/repositories/shows.repository';
+import { CreateShowsDto } from 'src/shows/domain/dto/create-shows.dto';
 
 @Injectable()
 export class ShowPrismaRepository implements ShowRepository {
   private prisma = new PrismaClient();
 
-  async findAll(): Promise<Show[]> {
+  async findAll(): Promise<CreateShowsDto[]> {
     const shows = await this.prisma.show.findMany({
       include: {
         artists: {
@@ -27,7 +28,7 @@ export class ShowPrismaRepository implements ShowRepository {
     );
   }
 
-  async findOne(id: string): Promise<Show | null> {
+  async findOne(id: string): Promise<CreateShowsDto | null> {
     const show = await this.prisma.show.findUnique({
       where: { id },
       include: {
@@ -47,7 +48,7 @@ export class ShowPrismaRepository implements ShowRepository {
     });
   }
 
-  async create(show: Show): Promise<Show> {
+  async create(show: CreateShowsDto): Promise<CreateShowsDto> {
     const created = await this.prisma.show.create({
       data: {
         id: show.id,
@@ -73,7 +74,7 @@ export class ShowPrismaRepository implements ShowRepository {
     });
   }
 
-  async createMany(shows: Show[]): Promise<Show[]> {
+  async createMany(shows: CreateShowsDto[]): Promise<CreateShowsDto[]> {
     const createdShows: Show[] = [];
 
     for (const show of shows) {
@@ -107,7 +108,10 @@ export class ShowPrismaRepository implements ShowRepository {
     return createdShows;
   }
 
-  async update(id: string, show: Partial<Show>): Promise<Show | null> {
+  async update(
+    id: string,
+    show: Partial<CreateShowsDto>,
+  ): Promise<CreateShowsDto | null> {
     await this.prisma.showArtist.deleteMany({ where: { showId: id } });
 
     const updated = await this.prisma.show.update({

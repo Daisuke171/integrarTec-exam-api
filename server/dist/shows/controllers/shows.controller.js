@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShowController = void 0;
 const common_1 = require("@nestjs/common");
 const shows_service_1 = require("../use-cases/shows.service");
+const create_shows_dto_1 = require("../domain/dto/create-shows.dto");
 let ShowController = class ShowController {
     showService;
     constructor(showService) {
@@ -57,7 +58,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [create_shows_dto_1.CreateShowsDto]),
     __metadata("design:returntype", void 0)
 ], ShowController.prototype, "create", null);
 __decorate([
