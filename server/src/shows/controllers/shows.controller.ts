@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ShowService } from '../use-cases/shows.service';
-import { Show } from '../domain/entities/shows.entity';
+import { CreateShowsDto } from '../domain/dto/create-shows.dto';
 
 @Controller('shows')
 export class ShowController {
@@ -25,17 +25,17 @@ export class ShowController {
   }
 
   @Post()
-  create(@Body() data: Omit<Show, 'id'>) {
+  create(@Body() data: CreateShowsDto) {
     return this.showService.create(data);
   }
 
   @Post('bulk')
-  createMany(@Body() shows: Omit<Show, 'id'>[]) {
+  createMany(@Body() shows: CreateShowsDto[]) {
     return this.showService.createMany(shows);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() data: Partial<Show>) {
+  update(@Param('id') id: string, @Body() data: Partial<CreateShowsDto>) {
     return this.showService.update(id, data);
   }
 

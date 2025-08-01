@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ArtistsController = void 0;
 const common_1 = require("@nestjs/common");
 const artists_service_1 = require("../use-cases/artists.service");
+const create_user_dto_1 = require("../domain/dto/create-user.dto");
 let ArtistsController = class ArtistsController {
     artistsService;
     constructor(artistsService) {
@@ -48,7 +49,7 @@ __decorate([
 ], ArtistsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseIntPipe({ errorHttpStatusCode: common_1.HttpStatus.NOT_ACCEPTABLE }))),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
@@ -57,7 +58,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [create_user_dto_1.CreateArtistsDto]),
     __metadata("design:returntype", void 0)
 ], ArtistsController.prototype, "create", null);
 __decorate([
@@ -69,7 +70,7 @@ __decorate([
 ], ArtistsController.prototype, "createMany", null);
 __decorate([
     (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseIntPipe({ errorHttpStatusCode: common_1.HttpStatus.NOT_ACCEPTABLE }))),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
