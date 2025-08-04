@@ -16,6 +16,7 @@ exports.ArtistsController = void 0;
 const common_1 = require("@nestjs/common");
 const artists_service_1 = require("../use-cases/artists.service");
 const create_user_dto_1 = require("../domain/dto/create-user.dto");
+const auth_guard_1 = require("../../auth/auth.guard");
 let ArtistsController = class ArtistsController {
     artistsService;
     constructor(artistsService) {
@@ -85,6 +86,7 @@ __decorate([
 ], ArtistsController.prototype, "delete", null);
 exports.ArtistsController = ArtistsController = __decorate([
     (0, common_1.Controller)('artists'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     __metadata("design:paramtypes", [artists_service_1.ArtistsService])
 ], ArtistsController);
 //# sourceMappingURL=artists.controller.js.map

@@ -8,11 +8,14 @@ import {
   Delete,
   ParseIntPipe,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { ArtistsService } from '../use-cases/artists.service';
 import { CreateArtistsDto } from '../domain/dto/create-user.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('artists')
+@UseGuards(AuthGuard)
 export class ArtistsController {
   constructor(private readonly artistsService: ArtistsService) {}
 
