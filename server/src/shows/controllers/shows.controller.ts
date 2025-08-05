@@ -6,11 +6,14 @@ import {
   Body,
   Put,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ShowService } from '../use-cases/shows.service';
 import { CreateShowsDto } from '../domain/dto/create-shows.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('shows')
+@UseGuards(AuthGuard)
 export class ShowController {
   constructor(private readonly showService: ShowService) {}
 
